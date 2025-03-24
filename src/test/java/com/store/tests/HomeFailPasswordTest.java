@@ -1,48 +1,22 @@
 package com.store.tests;
 
+import Base.BaseTest;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-
-import java.time.Duration;
 
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
-public class HomeFailPasswordTest {
-
-    WebDriver driver;
-    String baseUrl ="https://practicetestautomation.com/practice-test-login/";
-    String titlePage = "Test Login | Practice Test Automation";
-    String negativeMenssagePassword = "Your password is invalid!";
-    int TIME_OUT = 10;
-
-    WebElement inputUsername;
-    WebElement inputPassword;
-    WebElement btnSubmit;
+public class HomeFailPasswordTest extends BaseTest {
 
 
-    @BeforeClass
-    public void setup() {
-        //Creamos la instancia del navegador
-        driver = new FirefoxDriver();
-        //Configuramos la instancia del navegador para abrir en modo maximizado
-        driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(TIME_OUT));
-        //Abrimos la url de practicas
-        driver.get(baseUrl);
-        System.out.println("Cargamos los elementos");
-        //Capturamos los elementos
-        this.inputUsername = driver.findElement(By.id("username"));
-        this.inputPassword =  driver.findElement(By.id("password"));
-        this.btnSubmit = driver.findElement(By.id("submit"));
-    }
+    public String titlePage = "Test Login | Practice Test Automation";
+    public String negativeMenssagePassword = "Your password is invalid!";
 
+    public WebElement inputUsername;
+    public WebElement inputPassword;
+    public WebElement btnSubmit;
 
 
     @Test(priority = 1)
@@ -52,7 +26,14 @@ public class HomeFailPasswordTest {
 
     @Test(priority = 2)
     public void negativeLoginTest(){
+        System.out.println("Cargamos los elementos");
+        //Capturamos los elementos
+        this.inputUsername = driver.findElement(By.id("username"));
+        this.inputPassword =  driver.findElement(By.id("password"));
+        this.btnSubmit = driver.findElement(By.id("submit"));
         //enviamos los datosdel formulario
+        this.inputUsername.clear();
+        this.inputPassword.clear();
         this.inputUsername.sendKeys("student");
         this.inputPassword.sendKeys("incorrectPassword");
         //Damos clic en el boton 'submit'
@@ -74,12 +55,7 @@ public class HomeFailPasswordTest {
     }
 
 
-    @AfterClass
-    public void tearDown(){
-        if(driver != null){
-            //driver.close();
-        }
-    }
+
 
 
 }
